@@ -1,13 +1,13 @@
 [
   {
-    "item": "Diamantschwert",
-    "price": "64 Emeralds",
+    "item": "Elytra",
+    "price": "128 Emeralds",
     "enchant": "Unbreaking III, Sharpness V",
     "deliver": "Ja"
   },
   {
-    "item": "Eisenspitzhacke",
-    "price": "16 Emeralds",
+    "item": "1 Full Shulker Fireworks",
+    "price": "64 Emeralds",
     "enchant": "Keine",
     "deliver": "Nein"
   }
