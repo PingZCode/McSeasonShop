@@ -1,0 +1,14 @@
+[
+  {
+    "item": "Diamantschwert",
+    "price": "64 Emeralds",
+    "enchant": "Unbreaking III, Sharpness V",
+    "deliver": "Ja"
+  },
+  {
+    "item": "Eisenspitzhacke",
+    "price": "16 Emeralds",
+    "enchant": "Keine",
+    "deliver": "Nein"
+  }
+]
