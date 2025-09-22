@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>McSeasonShop</title>
+  <meta name="description" content="McSeasonShop — Minecraft items, live from GitHub" />
+  <style>
+    :root{
+      --bg:#0f1724;
+      --card:#0b1220;
+      --accent:#7c4dff;
+      --muted:#98a0b3;
+      --glass: rgba(255,255,255,0.04);
+      --glass-2: rgba(255,255,255,0.02);
+      --glass-border: rgba(255,255,255,0.06);
+      --radius:14px;
+      --mono: 'Segoe UI', Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: var(--mono);
+      background:
+        radial-gradient(1200px 600px at 10% 10%, rgba(124,77,255,0.09), transparent 8%),
+        radial-gradient(1000px 400px at 92% 90%, rgba(0,200,255,0.025), transparent 8%),
+        linear-gradient(180deg, #071026 0%, #07111a 100%);
+      color:#e6eef8;
+      min-height:100vh;
+      padding:32px;
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+    }
+
+    .wrap{ width:100%; max-width:900px; margin:0 auto; }
+
+    header{
+      display:flex;
+      gap:16px;
+      align-items:center;
+      margin-bottom:18px;
+    }
+    .logo{
+      width:72px;
+      height:72px;
+      border-radius:18px;
+      background: linear-gradient(135deg,var(--accent),#00c2ff);
+      box-shadow: 0 8px 30px rgba(124,77,255,0.12), inset 0 -8px 30px rgba(255,255,255,0.03);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transform:translateY(-6px);
+    }
+    h1{ font-size:26px; margin:0; }
+    p.lead{ margin:0; color:var(--muted); font-size:13px; }
+
+    /* toolbar */
+    .toolbar{ margin-top:14px; display:flex; justify-content:space-between; align-items:center; }
+    .btn{
+      background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      border:1px solid var(--glass-border);
+      padding:8px 12px;
+      border-radius:10px;
+      cursor:pointer;
+      color:#eaf0ff;
+      font-size:13px;
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+    }
+    .btn.ghost{ background:transparent; border:1px solid rgba(255,255,255,0.03); color:var(--muted) }
+    .small{ font-size:12px; color:var(--muted); }
+
+    /* statt Grid → Liste */
+    .list{ margin-top:18px; display:flex; flex-direction:column; gap:16px; }
+
+    /* card */
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.015), transparent);
+      border-radius: var(--radius);
+      padding:14px;
+      border:1px solid var(--glass-border);
+      box-shadow: 0 6px 20px rgba(2,6,23,0.6);
+      display:flex;
+      gap:12px;
+      align-items:center;
+      opacity:0;
+      transform: translateY(18px);
+      animation: cardIn 520ms cubic-bezier(.2,.9,.2,1) forwards;
+    }
+    @keyframes cardIn{ to{opacity:1; transform:none;} }
+
+    .thumb{
+      width:74px; height:74px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,0.03);
+      display:flex; align-items:center; justify-content:center;
+      font-weight:700; font-size:12px;
+      color:#fff; box-shadow: inset 0 -6px 18px rgba(0,0,0,0.35);
+    }
+
+    .meta{ flex:1; display:flex; flex-direction:column; gap:6px; }
+    .meta .item{ font-weight:700; font-size:16px; }
+    .meta .enchant{ color:var(--muted); font-size:13px; }
+
+    .right{ display:flex; flex-direction:column; gap:8px; align-items:flex-end; min-width:150px; }
+    .price{ font-weight:800; font-size:15px; color:#fff; }
+    .deliver{ font-size:13px; color:var(--muted); }
+    .buy{
+      padding:8px 12px; border-radius:10px;
+      background: linear-gradient(90deg,var(--accent),#00c2ff);
+      color:#021124; font-weight:800; border:none; cursor:pointer;
+    }
+    .buy:hover{ transform: translateY(-3px); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="logo"></div>
+      <div>
+        <h1>McSeasonShop</h1>
+        <p class="lead">Live shop — Items von GitHub</p>
+      </div>
+    </header>
+
+    <div class="toolbar">
+      <div>
+        <button class="btn" id="refreshBtn">↻ Refresh</button>
+        <span class="small" id="count">— Items</span>
+      </div>
+      <button class="btn ghost" id="repoBtn">View on GitHub</button>
+    </div>
+
+    <main>
+      <div id="list" class="list"></div>
+    </main>
+  </div>
+
+  <script>
+    const RAW_ITEMS_URL = 'https://raw.githubusercontent.com/PingZCode/McSeasonShop/refs/heads/main/items.json';
+    const DISCORD_USER_ID = '1317469921583829062';
+    const GITHUB_REPO = 'https://github.com/PingZCode/McSeasonShop';
+
+    const listEl = document.getElementById('list');
+    const countEl = document.getElementById('count');
+    const repoBtn = document.getElementById('repoBtn');
+    const refreshBtn = document.getElementById('refreshBtn');
+
+    repoBtn.addEventListener('click', ()=> window.open(GITHUB_REPO,'_blank'));
+    refreshBtn.addEventListener('click', ()=> loadItems(true));
+
+    function escapeHtml(str){ return String(str).replace(/[&<>"']/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s])); }
+
+    async function loadItems(force=false){
+      try{
+        const url = RAW_ITEMS_URL + (force ? ('?t=' + Date.now()) : '');
+        const res = await fetch(url,{cache:'no-store'});
+        if(!res.ok) throw new Error(res.status);
+        const items = await res.json();
+        renderItems(items);
+      }catch(e){
+        console.error(e);
+        listEl.innerHTML = '<div style="padding:20px;color:var(--muted)">Fehler beim Laden</div>';
+      }
+    }
+
+    function renderItems(items){
+      listEl.innerHTML='';
+      if(!items || items.length===0){
+        listEl.innerHTML='<div style="padding:20px;color:var(--muted)">Keine Items</div>';
+        countEl.textContent='0 Items';
+        return;
+      }
+      countEl.textContent=`${items.length} Items`;
+      items.forEach((it,idx)=>{
+        const card=document.createElement('div');
+        card.className='card';
+        card.setAttribute('data-idx',idx);
+
+        card.innerHTML=`
+          <div class="thumb">${escapeHtml(it.item[0]||'?')}</div>
+          <div class="meta">
+            <div class="item">${escapeHtml(it.item)}</div>
+            <div class="enchant">${escapeHtml(it.enchant||'Keine')}</div>
+          </div>
+          <div class="right">
+            <div class="price">${escapeHtml(it.price||'—')}</div>
+            <div class="deliver">Versand: ${it.deliver||'Nein'}</div>
+            <button class="buy">Kaufen</button>
+          </div>
+        `;
+        card.querySelector('.buy').addEventListener('click',()=>{
+          const msg=`Hi, ich möchte kaufen: ${it.item} — ${it.price} — Enchant: ${it.enchant||'Keine'} — Versand: ${it.deliver||'Nein'}`;
+          navigator.clipboard?.writeText(msg).catch(()=>{});
+          window.open(`https://discord.com/users/${DISCORD_USER_ID}`,'_blank');
+        });
+        listEl.appendChild(card);
+      });
+    }
+
+    loadItems();
+  </script>
+</body>
+</html>
