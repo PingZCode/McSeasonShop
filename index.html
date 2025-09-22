@@ -33,171 +33,193 @@
       justify-content:center;
     }
 
-    .wrap{ width:100%; max-width:900px; margin:0 auto; }
+    .wrap{width:100%;max-width:1100px;margin:0 auto;}
 
     header{
-      display:flex;
-      gap:16px;
-      align-items:center;
-      margin-bottom:18px;
+      display:flex;gap:16px;align-items:center;margin-bottom:18px;
     }
     .logo{
-      width:72px;
-      height:72px;
-      border-radius:18px;
+      width:72px;height:72px;border-radius:18px;
       background: linear-gradient(135deg,var(--accent),#00c2ff);
       box-shadow: 0 8px 30px rgba(124,77,255,0.12), inset 0 -8px 30px rgba(255,255,255,0.03);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      transform:translateY(-6px);
+      display:flex;align-items:center;justify-content:center;
     }
-    h1{ font-size:26px; margin:0; }
-    p.lead{ margin:0; color:var(--muted); font-size:13px; }
+    h1{font-size:26px;margin:0;line-height:1;}
+    p.lead{margin:0;color:var(--muted);font-size:13px;}
 
-    /* toolbar */
-    .toolbar{ margin-top:14px; display:flex; justify-content:space-between; align-items:center; }
+    .toolbar{margin-top:14px;display:flex;gap:10px;align-items:center;justify-content:space-between;}
+    .left-controls{display:flex;gap:10px;align-items:center;}
     .btn{
       background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
       border:1px solid var(--glass-border);
-      padding:8px 12px;
-      border-radius:10px;
-      cursor:pointer;
-      color:#eaf0ff;
-      font-size:13px;
-      display:inline-flex;
-      gap:8px;
-      align-items:center;
+      padding:8px 12px;border-radius:10px;
+      cursor:pointer;color:#eaf0ff;font-size:13px;
+      display:inline-flex;gap:8px;align-items:center;
+      backdrop-filter: blur(6px);
     }
-    .btn.ghost{ background:transparent; border:1px solid rgba(255,255,255,0.03); color:var(--muted) }
-    .small{ font-size:12px; color:var(--muted); }
+    .small{font-size:12px;color:var(--muted);}
 
-    /* statt Grid → Liste */
-    .list{ margin-top:18px; display:flex; flex-direction:column; gap:16px; }
+    .grid{margin-top:18px;display:grid;grid-template-columns:1fr;gap:16px;}
 
-    /* card */
     .card{
       background: linear-gradient(180deg, rgba(255,255,255,0.015), transparent);
       border-radius: var(--radius);
-      padding:14px;
-      border:1px solid var(--glass-border);
+      padding:14px;border:1px solid var(--glass-border);
       box-shadow: 0 6px 20px rgba(2,6,23,0.6);
-      display:flex;
-      gap:12px;
-      align-items:center;
-      opacity:0;
-      transform: translateY(18px);
+      display:flex;gap:12px;align-items:center;
+      transform: translateY(18px);opacity:0;
       animation: cardIn 520ms cubic-bezier(.2,.9,.2,1) forwards;
     }
-    @keyframes cardIn{ to{opacity:1; transform:none;} }
+    @keyframes cardIn{to{transform:none;opacity:1;}}
 
     .thumb{
-      width:74px; height:74px;
-      background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border-radius:12px;
-      border:1px solid rgba(255,255,255,0.03);
-      display:flex; align-items:center; justify-content:center;
-      font-weight:700; font-size:12px;
-      color:#fff; box-shadow: inset 0 -6px 18px rgba(0,0,0,0.35);
+      width:74px;height:74px;background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:12px;border:1px solid rgba(255,255,255,0.03);
+      display:flex;align-items:center;justify-content:center;
+      font-weight:700;font-size:12px;color:#fff;
+      box-shadow: inset 0 -6px 18px rgba(0,0,0,0.35);
     }
 
-    .meta{ flex:1; display:flex; flex-direction:column; gap:6px; }
-    .meta .item{ font-weight:700; font-size:16px; }
-    .meta .enchant{ color:var(--muted); font-size:13px; }
+    .meta{flex:1;display:flex;flex-direction:column;gap:6px;}
+    .meta .item{font-weight:700;font-size:16px;}
+    .meta .enchant span{
+      display:inline-block;margin-right:6px;padding:4px 8px;border-radius:6px;
+      font-size:12px;background: rgba(124,77,255,0.15);color:#c084f5;
+      font-weight:600;box-shadow: inset 0 -2px 6px rgba(0,0,0,0.35);
+    }
 
-    .right{ display:flex; flex-direction:column; gap:8px; align-items:flex-end; min-width:150px; }
-    .price{ font-weight:800; font-size:15px; color:#fff; }
-    .deliver{ font-size:13px; color:var(--muted); }
+    .right{display:flex;flex-direction:column;gap:6px;align-items:flex-end;min-width:150px;}
+    .price{font-weight:800;font-size:15px;background: linear-gradient(90deg,#fff,rgba(255,255,255,0.7));-webkit-background-clip:text;color:transparent;}
+    .deliver{font-size:13px;color:var(--muted);}
+    .stock{font-size:13px;color:#4ade80;font-weight:600;}
+
     .buy{
-      padding:8px 12px; border-radius:10px;
+      padding:8px 12px;border-radius:10px;
       background: linear-gradient(90deg,var(--accent),#00c2ff);
-      color:#021124; font-weight:800; border:none; cursor:pointer;
+      color:#021124;font-weight:800;border:none;cursor:pointer;
+      box-shadow: 0 6px 26px rgba(124,77,255,0.12);
+      transition: transform .12s ease;
     }
-    .buy:hover{ transform: translateY(-3px); }
+    .buy:hover{transform: translateY(-4px);}
   </style>
 </head>
 <body>
   <div class="wrap">
     <header>
-      <div class="logo"></div>
+      <div class="logo" aria-hidden="true">
+        <svg width="38" height="38" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="3" y="11" width="14" height="2" rx="1" transform="rotate(-35 3 11)" fill="white" opacity="0.95"/>
+          <rect x="12" y="2" width="2" height="10" rx="1" transform="rotate(-35 12 2)" fill="rgba(0,0,0,0.06)"/>
+        </svg>
+      </div>
       <div>
         <h1>McSeasonShop</h1>
-        <p class="lead">Live shop — Items von GitHub</p>
+        <p class="lead">Live shop — Items geladen von GitHub. Klicke "Kaufen" um zur Discord-Nachricht weiterzuleiten.</p>
       </div>
     </header>
 
     <div class="toolbar">
-      <div>
+      <div class="left-controls">
         <button class="btn" id="refreshBtn">↻ Refresh</button>
-        <span class="small" id="count">— Items</span>
+        <div class="small" id="count">— Items</div>
       </div>
-      <button class="btn ghost" id="repoBtn">View on GitHub</button>
     </div>
 
-    <main>
-      <div id="list" class="list"></div>
+    <main id="mainContent">
+      <div id="grid" class="grid"></div>
+      <div id="empty" class="empty" style="display:none">Keine Items gefunden.</div>
     </main>
   </div>
 
   <script>
     const RAW_ITEMS_URL = 'https://raw.githubusercontent.com/PingZCode/McSeasonShop/refs/heads/main/items.json';
     const DISCORD_USER_ID = '1317469921583829062';
-    const GITHUB_REPO = 'https://github.com/PingZCode/McSeasonShop';
 
-    const listEl = document.getElementById('list');
+    const gridEl = document.getElementById('grid');
+    const emptyEl = document.getElementById('empty');
     const countEl = document.getElementById('count');
-    const repoBtn = document.getElementById('repoBtn');
-    const refreshBtn = document.getElementById('refreshBtn');
+    document.getElementById('refreshBtn').addEventListener('click', ()=> loadItems(true));
 
-    repoBtn.addEventListener('click', ()=> window.open(GITHUB_REPO,'_blank'));
-    refreshBtn.addEventListener('click', ()=> loadItems(true));
+    function e(tag, attrs = {}, children = '') {
+      const el = document.createElement(tag);
+      for (const k in attrs) {
+        if (k === 'class') el.className = attrs[k];
+        else if (k === 'html') el.innerHTML = attrs[k];
+        else el.setAttribute(k, attrs[k]);
+      }
+      if (children) {
+        if (typeof children === 'string') el.innerHTML = children;
+        else if (Array.isArray(children)) children.forEach(n => el.appendChild(n));
+      }
+      return el;
+    }
 
-    function escapeHtml(str){ return String(str).replace(/[&<>"']/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s])); }
+    function renderEnchant(enchant) {
+      if (!enchant) return '<span class="small">Keine</span>';
+      return enchant.split(',').map(p => `<span>${p.trim()}</span>`).join('');
+    }
 
-    async function loadItems(force=false){
-      try{
+    async function loadItems(force=false) {
+      try {
         const url = RAW_ITEMS_URL + (force ? ('?t=' + Date.now()) : '');
-        const res = await fetch(url,{cache:'no-store'});
-        if(!res.ok) throw new Error(res.status);
+        const res = await fetch(url, {cache:'no-store'});
         const items = await res.json();
-        renderItems(items);
-      }catch(e){
-        console.error(e);
-        listEl.innerHTML = '<div style="padding:20px;color:var(--muted)">Fehler beim Laden</div>';
+        renderItems(items || []);
+      } catch (err) {
+        console.error('Fehler beim Laden:', err);
+        showEmpty(true);
       }
     }
 
-    function renderItems(items){
-      listEl.innerHTML='';
-      if(!items || items.length===0){
-        listEl.innerHTML='<div style="padding:20px;color:var(--muted)">Keine Items</div>';
-        countEl.textContent='0 Items';
-        return;
-      }
-      countEl.textContent=`${items.length} Items`;
-      items.forEach((it,idx)=>{
-        const card=document.createElement('div');
-        card.className='card';
-        card.setAttribute('data-idx',idx);
+    function showEmpty(show){
+      emptyEl.style.display = show ? 'block' : 'none';
+      gridEl.style.display = show ? 'none' : 'grid';
+      countEl.textContent = show ? '0 Items' : `${gridEl.children.length} Items`;
+    }
 
-        card.innerHTML=`
-          <div class="thumb">${escapeHtml(it.item[0]||'?')}</div>
-          <div class="meta">
-            <div class="item">${escapeHtml(it.item)}</div>
-            <div class="enchant">${escapeHtml(it.enchant||'Keine')}</div>
-          </div>
-          <div class="right">
-            <div class="price">${escapeHtml(it.price||'—')}</div>
-            <div class="deliver">Versand: ${it.deliver||'Nein'}</div>
-            <button class="buy">Kaufen</button>
-          </div>
-        `;
-        card.querySelector('.buy').addEventListener('click',()=>{
-          const msg=`Hi, ich möchte kaufen: ${it.item} — ${it.price} — Enchant: ${it.enchant||'Keine'} — Versand: ${it.deliver||'Nein'}`;
-          navigator.clipboard?.writeText(msg).catch(()=>{});
-          window.open(`https://discord.com/users/${DISCORD_USER_ID}`,'_blank');
+    function renderItems(items){
+      gridEl.innerHTML = '';
+      if (!items.length){ showEmpty(true); return; }
+      showEmpty(false);
+      countEl.textContent = `${items.length} Items`;
+
+      items.forEach((it, idx) => {
+        const itemName = it.item || 'Unbenannt';
+        const enchant = it.enchant || 'Keine';
+        const price = it.price || '—';
+        const deliver = (it.deliver || 'Nein');
+        const stock = it.stock || 0;
+
+        const card = e('div',{class:'card','data-idx':idx});
+        const thumb = e('div',{class:'thumb'}, itemName[0].toUpperCase());
+        const meta = e('div',{class:'meta'});
+        const right = e('div',{class:'right'});
+
+        const itemLine = e('div',{class:'item'}, `<strong>${itemName}</strong>`);
+        const enchantLine = e('div',{class:'enchant', html: renderEnchant(enchant)});
+        meta.appendChild(itemLine);
+        meta.appendChild(enchantLine);
+
+        const priceEl = e('div',{class:'price'}, price);
+        const deliverEl = e('div',{class:'deliver'}, 'Versand: ' + (deliver.toLowerCase().startsWith('j') ? 'Ja' : 'Nein'));
+        const stockEl = e('div',{class:'stock'}, `Auf Lager: ${stock}`);
+
+        const buyBtn = e('button',{class:'buy'}, 'Kaufen');
+        buyBtn.addEventListener('click', ()=> {
+          const pre = `Hi, ich möchte kaufen: ${itemName} — ${price} — Enchant: ${enchant} — Versand: ${deliver} — Lager: ${stock}`;
+          navigator.clipboard?.writeText(pre).catch(()=>{});
+          window.open(`https://discord.com/users/${DISCORD_USER_ID}`, '_blank');
         });
-        listEl.appendChild(card);
+
+        right.appendChild(priceEl);
+        right.appendChild(deliverEl);
+        right.appendChild(stockEl);
+        right.appendChild(buyBtn);
+
+        card.appendChild(thumb);
+        card.appendChild(meta);
+        card.appendChild(right);
+        gridEl.appendChild(card);
       });
     }
 
