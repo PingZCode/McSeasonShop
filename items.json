@@ -1,30 +1,16 @@
 [
   {
-    "item": "Dia Schwert",
-    "enchant": "Schärfe V, Unbreaking III, Looting II",
+    "item": "TnT 64Stk",
+    "enchant": "Keine",
     "price": "64 Emeralds",
     "deliver": "Ja",
-    "stock": 4
-  },
-  {
-    "item": "Netherite Brustpanzer",
-    "enchant": "Schutz IV, Mending, Unbreaking III",
-    "price": "160 Emeralds",
-    "deliver": "Ja",
-    "stock": 5
-  },
-  {
-    "item": "Elytra",
-    "enchant": "Unbreaking III, Mending",
-    "price": "VHB",
-    "deliver": "Nein",
     "stock": 1
   },
   {
-    "item": "Gold Apfel",
+    "item": "Fire Works 64Stk",
     "enchant": "Keine",
     "price": "16 Emeralds",
     "deliver": "Ja",
-    "stock": 32
+    "stock": 2
   }
 ]
