@@ -4,12 +4,12 @@
     "enchant": "Keine",
     "price": "55 Emeralds",
     "deliver": "Ja",
-    "stock": 3
+    "stock": 5
   },
     {
     "item": "Tnt 32 Stk",
     "enchant": "Keine",
-    "price": "44",
+    "price": "44 Emeralds",
     "deliver": "Ja",
     "stock": 2
     }, 
@@ -18,6 +18,6 @@
     "enchant": "Keine",
     "price": "16 Emeralds",
     "deliver": "Ja",
-    "stock": 2
+    "stock": 10
   }
 ]
