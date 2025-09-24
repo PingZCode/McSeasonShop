@@ -3,21 +3,21 @@
     "item": "Fireworks 256Stk",
     "enchant": "Keine",
     "price": "55 Emeralds",
-    "deliver": "Ja",
+    "deliver": "Nein",
     "stock": 5
   },
     {
     "item": "Tnt 32 Stk",
     "enchant": "Keine",
     "price": "44 Emeralds",
-    "deliver": "Ja",
+    "deliver": "Nein",
     "stock": 2
     }, 
   {
     "item": "Fire Works 64Stk",
     "enchant": "Keine",
     "price": "16 Emeralds",
-    "deliver": "Ja",
+    "deliver": "Nein",
     "stock": 10
   }
 ]
