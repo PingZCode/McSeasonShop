@@ -10,14 +10,14 @@
     "item": "Tnt 32 Stk",
     "enchant": "Keine",
     "price": "44 Emeralds",
-    "deliver": "Nein",
+    "deliver": "Nur Abholung Möglich",
     "stock": 2
     }, 
   {
     "item": "Fire Works 64Stk",
     "enchant": "Keine",
     "price": "16 Emeralds",
-    "deliver": "Nein",
+    "deliver": "Nur Abholung Möglich",
     "stock": 10
   }
 ]
