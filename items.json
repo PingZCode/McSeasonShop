@@ -6,6 +6,13 @@
     "deliver": "Ja",
     "stock": 3
   },
+    {
+    "item": "Tnt 32 Stk",
+    "enchant": "Keine",
+    "price": "44",
+    "deliver": "Ja",
+    "stock": 2
+    }, 
   {
     "item": "Fire Works 64Stk",
     "enchant": "Keine",
